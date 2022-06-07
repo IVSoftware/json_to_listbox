@@ -33,7 +33,7 @@ namespace json_to_listbox
             foreach(var file in Directory.GetFiles(dir, "*.json"))
             {
                 var text = File.ReadAllText(file);
-                 // Having a model makes it easy to convert the Json.
+                // Having a model makes it easy to convert the Json.
                 var model = JsonConvert.DeserializeObject<UserAccount>(text);
                 // Adding the model to the list will use the "ToString" method to display it.
                 listBoxJsonNames.Items.Add(model);
