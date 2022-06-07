@@ -33,12 +33,14 @@ namespace json_to_listbox
             foreach(var file in Directory.GetFiles(dir, "*.json"))
             {
                 var text = File.ReadAllText(file);
-                var model = JsonConvert.DeserializeObject<JsonModel>(text);
+                 // Having a model makes it easy to convert the Json.
+                var model = JsonConvert.DeserializeObject<UserAccount>(text);
+                // Adding the model to the list will use the "ToString" method to display it.
                 listBoxJsonNames.Items.Add(model);
             }
         }
 
-        class JsonModel
+        class UserAccount
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
@@ -48,12 +50,13 @@ namespace json_to_listbox
             public string IsActive { get; set; }
             public string UserId { get; set; }
 
-            public override string ToString() => $"{FirstName} {LastName}";
+            // Format how this record should display in the ListBox
+            public override string ToString() => $"User: {FirstName} {LastName}";
         }
 
         private void listBoxJsonNames_SelectedValueChanged(object sender, EventArgs e)
         {
-            var model = (JsonModel)listBoxJsonNames.SelectedItem;
+            var model = (UserAccount)listBoxJsonNames.SelectedItem;
             textBoxFirstName.Text = model.FirstName;
             textBoxLastName.Text = model.LastName;
             textBoxUserId.Text = model.UserId;
